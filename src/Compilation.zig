@@ -1452,7 +1452,7 @@ pub fn create(gpa: Allocator, options: InitOptions) !*Compilation {
 
         comp.* = .{
             .gpa = gpa,
-            .arena = arena_allocator,
+            .arena = undefined, // populated after we are finished with `arena`
             .module = opt_zcu,
             .cache_use = undefined, // populated below
             .bin_file = null, // populated below
@@ -1676,6 +1676,7 @@ pub fn create(gpa: Allocator, options: InitOptions) !*Compilation {
             },
         }
 
+        comp.arena = arena_allocator;
         break :comp comp;
     };
     errdefer comp.destroy();
