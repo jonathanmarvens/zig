@@ -2641,6 +2641,8 @@ comptime {
 }
 
 pub fn astGenFile(mod: *Module, file: *File) !void {
+    assert(!file.mod.isBuiltin());
+
     const tracy = trace(@src());
     defer tracy.end();
 
